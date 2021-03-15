@@ -1,0 +1,48 @@
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="highlight/styles/default.css">
+<script src="highlight/highlight.pack.js"></script>
+</head>
+<body>
+	<pre>
+		<code id="code" class="" style="min-height:400px;"></code>
+	</pre>
+</body>
+</html>
+
+<script>
+
+
+
+window.showData = function(data){
+	try{
+		var code = document.getElementById("code");
+		code.class = data.lg;
+		code.innerText = data.data;
+		if(code.class=="txt"){
+			return;
+		}
+		if(hljs){
+			setTimeout(hljs.highlightAll,100);
+		}
+	}catch(e){
+		alert(e);
+	}
+	
+	
+}
+
+window.showText = function(data){
+	try{
+		var code = document.getElementById("code");
+		code.class = data.lg;
+		code.innerText = data.data;
+	}catch(e){
+		alert(e);
+	}
+}
+
+</script>
