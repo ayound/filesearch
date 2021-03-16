@@ -606,10 +606,21 @@ public class FileSearchApp extends Application {
 		new Thread(scanWorker).start();
 	}
 
-	protected boolean previewFile() {
+	protected void previewFile() {
 		if (!previewDialog.isShowing()) {
-			return false;
+			return;
 		}
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				doPreviewFile();
+
+			}
+		});
+	}
+
+	protected boolean doPreviewFile() {
 
 		FileModel model = table.getSelectionModel().getSelectedItem();
 		File modelFile = new File(model.getFileAbsolutePath());
@@ -821,7 +832,8 @@ public class FileSearchApp extends Application {
 	protected void openFile() {
 		FileModel model = table.getSelectionModel().getSelectedItem();
 		if (!new File(model.getFileAbsolutePath()).exists()) {
-			statusLabel.setText(String.format(Messages.getString("FileSearchApp.FILE_NOT_EXIST"), model.getFileAbsolutePath())); //$NON-NLS-1$
+			statusLabel.setText(
+					String.format(Messages.getString("FileSearchApp.FILE_NOT_EXIST"), model.getFileAbsolutePath())); //$NON-NLS-1$
 			return;
 		}
 		CommandUtil.executeCommand("/usr/bin/open", "-n", model.getFileAbsolutePath()); //$NON-NLS-1$ //$NON-NLS-2$
@@ -831,7 +843,8 @@ public class FileSearchApp extends Application {
 	protected void openDir() {
 		FileModel model = table.getSelectionModel().getSelectedItem();
 		if (!new File(model.getFileAbsolutePath()).exists()) {
-			statusLabel.setText(String.format(Messages.getString("FileSearchApp.FILE_NOT_EXIST"), model.getFileAbsolutePath())); //$NON-NLS-1$
+			statusLabel.setText(
+					String.format(Messages.getString("FileSearchApp.FILE_NOT_EXIST"), model.getFileAbsolutePath())); //$NON-NLS-1$
 			return;
 		}
 		CommandUtil.executeCommand("/usr/bin/open", "-n", "-R", model.getFileAbsolutePath()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
