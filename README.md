@@ -35,6 +35,8 @@ jdk8,使用javafx做UI，使用lucene做索引，使用tika探测文档，支持
 
 ## 安装说明：
 
+下载地址：https://github.com/ayound/filesearch/releases/tag/0.0.5
+
 1.因为没有mac的签名，请自行解决
 
 2.如果要自行编译，请在mac + jdk 8下使用 mvn clean package命令
